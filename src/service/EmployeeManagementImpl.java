@@ -31,21 +31,25 @@ public class EmployeeManagementImpl implements EmployeeManagement {
 
     @Override
     public void addEmployee(Employee e) {
-        // Check trùng mã nhân viên nếu cần
-        for (Employee emp : employees)
+        Department targetDepartment = null;
+        for (Department d : departments) {
+            if (d.getDepartmentId() == e.getDepartmentId()) {
+                targetDepartment = d;
+                break;
+            }
+        }
+        if (targetDepartment == null) {
+            System.out.println("Không tồn tại phòng ban với mã " + e.getDepartmentId() + ". Không thể thêm nhân viên!");
+            return;
+        }
+        for (Employee emp : employees) {
             if (emp.getId().equals(e.getId())) {
                 System.out.println("Nhân viên đã tồn tại!");
                 return;
             }
-        employees.add(e);
-        // Thêm nhân viên vào phòng ban tương ứng
-        for (Department d : departments) {
-            if (d.getDepartmentId() == e.getDepartmentId()) {
-                d.addEmployee(e);
-                return;
-            }
         }
-        System.out.println("Không tìm thấy phòng ban phù hợp!");
+        employees.add(e);
+        targetDepartment.addEmployee(e);
     }
 
     @Override
