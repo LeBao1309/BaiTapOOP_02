@@ -16,7 +16,7 @@ public class Department {
     public int getDepartmentId() { return departmentId; }
     public String getDepartmentName() { return departmentName; }
     public void setDepartmentName(String departmentName) { this.departmentName = departmentName; }
-    public String setDepartmentAddress() { return departmentAddress; }
+    public void setDepartmentAddress(String address) { this.departmentAddress = address; }
     public List<Employee> getEmployees() { return employees; }
     public void addEmployee(Employee e ){employees.add(e);}
     public void showEmployees(){
